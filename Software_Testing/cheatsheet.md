@@ -283,3 +283,142 @@ max_val + 1  (just outside, 上边界外)
 ```
 
 **EP + BVA 配合：** 先用 EP 划等价类，再用 BVA 在每个边界选测试值。两者互补，不是二选一。
+
+---
+
+## Decision Table Testing (3.4)
+
+**适用场景：** 多个条件共同决定结果（n 个条件 → 2ⁿ 种组合）
+
+| 术语 | 含义 |
+|------|------|
+| **Condition** | 影响行为的布尔判断（T/F） |
+| **Action** | 特定条件组合下系统执行的行为 |
+| **Rule** | 一种条件组合 + 对应动作 = 一列 = 一个测试用例 |
+
+```
+                Rule 1   Rule 2   Rule 3   Rule 4
+  C1: 条件A      T        T        F        F
+  C2: 条件B      T        F        T        F
+  ─────────────────────────────────────────────
+  A1: 动作X      ✓        ✗        ✗        ✗
+  A2: 动作Y      ✗        ✓        ✓        ✗
+```
+
+**减少 Rule：** 条件对动作无影响时用 `—`（don't care）合并；不可能出现的组合可删除
+
+**vs EP/BVA：** EP/BVA 处理单个输入的值选择；Decision Table 处理多个条件的组合覆盖
+
+---
+
+## State Transition Testing (3.5)
+
+**适用场景：** 同一个输入在不同历史状态下产生不同结果（stateful system）
+
+| 术语 | 含义 |
+|------|------|
+| **State** | 系统当前的"模式"，决定对下一个输入如何响应 |
+| **Transition** | 系统从一个 State 移动到另一个 State |
+| **Event / Trigger** | 引起 Transition 发生的动作 |
+| **Invalid Transition** | 某个 State 下不应该被接受的 Event |
+
+**State Diagram：** 圆圈 = State，箭头 = Transition，箭头标签 = Event
+
+**测试策略：**
+- All Transitions Coverage：每条有效 Transition 至少触发一次（推荐）
+- Invalid Transitions：验证系统正确拒绝不该发生的操作
+
+---
+
+## 第3章设计技术总览
+
+| 技术 | 解决什么问题 |
+|------|------------|
+| EP (3.2) | 单个输入范围太大 → 等价类缩减 |
+| BVA (3.3) | 边界处 off-by-one bug → 测 min-1、min、max、max+1 |
+| Decision Table (3.4) | 多个条件组合 → 每种 Rule 一个测试用例 |
+| State Transition (3.5) | 行为依赖历史状态 → 测所有 Transition + Invalid |
+
+---
+
+## Code Coverage Basics (4.1)
+
+**Code Coverage** = 测试套件实际执行了多少比例的代码（White-Box 视角）
+
+```
+Coverage % = (被执行的代码行数 / 总代码行数) × 100
+```
+
+| Coverage % | 含义 |
+|-----------|------|
+| 100% | 每行代码都被至少一个测试执行过 |
+| 低 % | 有代码死角，bug 可能藏在从未被测试的路径里 |
+| 0% | 该段代码完全没被测试触碰 |
+
+**Coverage Report 颜色含义：**
+- 绿色行 = 测试执行过
+- 红色行 = 测试从没执行过 → 需要补测试
+
+**Instrumentation（插桩）：** Coverage Tool 在运行时自动插入记录器追踪执行路径，不需要修改源代码。
+
+### 常见 Coverage Tool
+
+| 语言 | 工具 |
+|------|------|
+| Python | `pytest-cov` |
+| JavaScript | `Istanbul / Jest` 内建 |
+| Java | `JaCoCo` |
+| Go | `go test -cover`（内建） |
+
+```bash
+# Python 运行示例
+pytest --cov=your_module tests/
+pytest --cov=your_module --cov-report=html tests/
+```
+
+**关键警告：** Coverage 高 ≠ 没有 bug。执行过不等于验证了结果正确（见 4.3）。
+
+---
+
+## Statement & Branch Coverage (4.2)
+
+| | Statement Coverage | Branch Coverage |
+|-|-------------------|-----------------|
+| **衡量对象** | 每条语句是否被执行 | 每个判断点的每条分支是否被走过 |
+| **粒度** | 行级别 | 决策点级别 |
+| **强度** | 弱 | 强 |
+
+```
+Branch Coverage 100% → Statement Coverage 一定 100%
+Statement Coverage 100% → Branch Coverage 不一定 100%
+```
+
+**Decision Point** = 让程序做选择的地方（`if` / `while` / `for` / 三元表达式），每个产生 **2 条分支（True / False）**。
+
+**Branch Coverage 公式：**
+```
+Branch Coverage % = (被执行的分支数 / 总分支数) × 100
+```
+
+**Untested Branch 危险：** 没走过的分支里的 bug 完全不可见——测试通过不代表那条路径是对的。
+
+**记忆规则：** Statement 测"有没有跑到这行"，Branch 测"判断点的两个结果都测到了吗"。
+
+---
+
+## Coverage Pitfalls (4.3)
+
+**核心原则：执行 ≠ 验证。Coverage 高 ≠ 测试质量高。**
+
+| 陷阱 | 含义 |
+|------|------|
+| **100% Coverage Myth** | 每行都执行过，不代表结果是对的 |
+| **Coverage Without Assertions** | 没有 `assert` 的测试可以骗到 100% coverage，但发现不了任何 bug |
+| **Vanity Metric** | 把 coverage % 当 KPI → 开发者凑数字，写无意义测试 |
+| **False Confidence** | 高 coverage 让团队误以为测得很好，放松对质量的关注 |
+
+**Coverage 的正确用法：**
+- ✅ 诊断工具：找出哪些代码路径从没被测试过（coverage 低的地方值得关注）
+- ❌ 不是 KPI：不要以达到某个 % 为目标
+
+**好测试的标准：有 assertion、测有意义的场景、基于需求设计、能抓住真实 bug。**
