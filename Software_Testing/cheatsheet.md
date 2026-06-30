@@ -422,3 +422,25 @@ Branch Coverage % = (被执行的分支数 / 总分支数) × 100
 - ❌ 不是 KPI：不要以达到某个 % 为目标
 
 **好测试的标准：有 assertion、测有意义的场景、基于需求设计、能抓住真实 bug。**
+
+---
+
+## Why Test Doubles Exist (5.1)
+
+**Dependency** = 被测代码需要调用的外部东西（数据库、API、系统时间、随机数、邮件服务等）
+
+**真实 Dependency 的三大问题：**
+
+| 问题 | 后果 |
+|------|------|
+| **Slow** | 测试套件变慢，开发者跳过测试 |
+| **External / Unreliable** | 测试失败原因不明——是代码 bug，还是外部服务挂了？ |
+| **Non-determinism** | 同样输入，不同时间产生不同结果 → Flaky Test |
+
+**Test Double** = 在测试中替换真实 dependency 的假对象（总称，umbrella term）
+
+- 名字来自电影替身演员（Stunt Double）
+- 假对象直接返回固定值：快速 + 稳定 + 确定
+- 实现 Isolation → 测试失败时，确定是被测代码的问题，不是外部依赖
+
+**Non-determinism 常见来源：** `datetime.now()`、`random.random()`、外部 API、数据库共享状态
