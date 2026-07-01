@@ -43,4 +43,26 @@ Model tiering: OpenAI's new GPT 5.6 comes in three sizes — Sol (biggest/pricie
 - Risk of "privatized" intelligence: The cheap stuff stays open to everyone, but there's growing worry that the most powerful models might end up reserved for a select few approved companies instead of the public.
 - Chips matter as much as the model: Even if a model is smart, real-world speed depends on hardware — OpenAI's Sol model paired with Cerebras chips can hit huge speeds, something China can't easily match yet due to weaker chip infrastructure.
 
+---
+
+# Are we really doing this again | [Link](https://youtu.be/vM6DNlsdpsg?si=Vp9eBYCZR6iR08Q5)
+
+**By:** NeetCode
+
+**Date Watched:** 2026-07-01
+
+---
+
+![thumbnail](https://i.ytimg.com/vi/vM6DNlsdpsg/hqdefault.jpg)
+
+---
+
+## Key Lessons / Takeaways
+
+- "Loops" 就是自动化 — 不是什么新概念，就是设置一个自动重复运行的任务，不需要你每次手动 prompt AI。
+- 准确率会 compound — 如果 AI 每步有 5% 的错误率，跑 10 步之后整体准确率会从 95% 掉到约 60%，越跑越偏。
+- "For each" 比 "while" 更靠谱 — 让 AI 处理一个有限的任务列表比让它无限循环运行要安全得多，边界清楚错误才不会失控。
+- 说得模糊不代表有深度 — 那些 thought leaders 讲得很玄，但追问细节时基本没人能给出清晰的 workflow，大家都在摸索。
+- 注意 incentives — 卖 AI coding 工具的人（比如 Anthropic、OpenAI）天然有动机夸大效果，没有利益牵扯的人说的话往往更值得参考。
+
 
