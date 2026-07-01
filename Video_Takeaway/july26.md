@@ -1,4 +1,4 @@
-# Software engineering at the tipping point | [Link](https://youtu.be/2n41YjR5QfU?si=WKdO1KiJITvTeh5A)
+# 1. Software engineering at the tipping point | [Link](https://youtu.be/2n41YjR5QfU?si=WKdO1KiJITvTeh5A)
 
 **By:** Google for Developers
 
@@ -22,7 +22,7 @@
 
 ---
 
-# GPT 5.6 explained in 8min.. | [Link](https://youtu.be/6DKDgQ27smM?si=kalzVsPv0NmERkIG)
+# 2. GPT 5.6 explained in 8min.. | [Link](https://youtu.be/6DKDgQ27smM?si=kalzVsPv0NmERkIG)
 
 **By:** Caleb Writes Code
 
@@ -45,7 +45,7 @@ Model tiering: OpenAI's new GPT 5.6 comes in three sizes — Sol (biggest/pricie
 
 ---
 
-# Are we really doing this again | [Link](https://youtu.be/vM6DNlsdpsg?si=Vp9eBYCZR6iR08Q5)
+# 3. Are we really doing this again | [Link](https://youtu.be/vM6DNlsdpsg?si=Vp9eBYCZR6iR08Q5)
 
 **By:** NeetCode
 
