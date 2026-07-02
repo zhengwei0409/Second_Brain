@@ -65,4 +65,26 @@ Model tiering: OpenAI's new GPT 5.6 comes in three sizes — Sol (biggest/pricie
 - 说得模糊不代表有深度 — 那些 thought leaders 讲得很玄，但追问细节时基本没人能给出清晰的 workflow，大家都在摸索。
 - 注意 incentives — 卖 AI coding 工具的人（比如 Anthropic、OpenAI）天然有动机夸大效果，没有利益牵扯的人说的话往往更值得参考。
 
+---
+
+# 4. Creator of uv, ty, Ruff: How Software Engineering Is Changing | Charlie Marsh | [Link](https://youtu.be/Iw65FD4MGgs?si=gRU0x5YUMb84Apnt)
+
+**By:** Ryan Peterman
+
+**Date Watched:** 2026-07-01
+
+---
+
+![thumbnail](https://i.ytimg.com/vi/Iw65FD4MGgs/hqdefault.jpg)
+
+---
+
+## Key Lessons / Takeaways
+
+- AI has made writing code cheap, but reviewing it is still expensive — so review, not writing, is now the real bottleneck in software teams.
+- Rewriting code with AI is risky because even if all tests pass, hidden behaviors users secretly depend on (Hyrum's Law) can still break.
+- A new generation of developer tools rewritten in faster languages. (like Rust) — this is why Python tools like Ruff and UV became 10-100x faster than their predecessors.
+- Good engineers get even more valuable with AI, not less — because judgment and reviewing skill matter more than typing speed now.
+- Junior engineers face a real challenge: learning by doing might get replaced by "learning from AI," and it's still unclear how beginners build deep skill in this new environment.
+
 
