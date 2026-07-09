@@ -493,3 +493,60 @@ Refactor → 在测试保护下改善代码结构（不改行为）
 **Short Cycle：** 每个循环只处理一个小行为，几分钟内完成。改动小 → 出错时立刻定位。
 
 **TDD 的价值：** 自动获得高 coverage + 设计更清晰（先想清楚 API）+ 重构有保障。
+
+---
+
+## Behavior-Driven Development / BDD (6.2)
+
+**BDD** = TDD 的延伸，把测试写成自然语言，让开发者和业务方用同一套语言沟通。
+
+**Given-When-Then（对应 AAA）：**
+
+```gherkin
+Given  用户是会员            # Arrange
+When   用户结算 100 元商品    # Act
+Then   应付金额为 80 元       # Assert
+```
+
+| 概念 | 含义 |
+|------|------|
+| **Specification by Example** | 用具体例子代替模糊描述，消除歧义 |
+| **Ubiquitous Language** | 同一个词汇统一出现在业务讨论、代码、测试里 |
+| **Living Documentation** | BDD 场景 = 测试 + 文档，代码变了测试 fail，文档永远同步 |
+
+**BDD vs TDD：**
+
+| | TDD | BDD |
+|-|-----|-----|
+| 受众 | 开发者 | 所有人（开发、测试、产品、业务） |
+| 语言 | 代码 | 自然语言（Given-When-Then） |
+| 关注点 | 函数行为 | 系统业务行为 |
+
+---
+
+## Test Frameworks (7.1)
+
+**Test Framework** = 一整套帮你写、组织、运行、检查测试的工具集合，由三部分组成：
+
+```
+Test Framework
+├── Test Runner       — 找到测试 + 执行测试
+├── Assertion Library — 判断结果对不对
+└── Reporting          — 汇总输出结果
+```
+
+| 概念 | 作用 |
+|------|------|
+| **Test Runner** | 自动执行所有测试，不用手动一个个跑 |
+| **Test Discovery** | 按命名规则（如 `test_` 前缀）自动找到测试，不用手动维护清单 |
+| **Assertion Library** | 把"检查结果"标准化成一句话（如 `assert result == expected`），取代手写 if-else |
+| **Reporting** | 汇总 pass/fail，标出失败原因和位置 |
+
+**执行流程：**
+
+```
+写测试（assertion） → Runner 做 discovery 找到测试 → 逐个执行
+    → 收集 assert 结果 → 生成 Reporting
+```
+
+**关键点：** 不同语言的框架（pytest、Jest、JUnit...）语法不同，但都实现这三件事——先懂逻辑，语法只是换皮。
